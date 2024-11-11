@@ -12,6 +12,7 @@ Repository with notes from Rocketseat classes regarding NestJS
 - Foi utilizado o _pnpm_ pois ele lida melhor com a memória cache (Recomendação do Diego);
 - Lembrete, para utilizar o _pnpm_ é necessário executar antes _npm install -g pnpm_;
 - Muitos arquivos gerados podem ser deletados, de maneira geral, a pasta pode ficar da seguinte maneira após ser executado o comando de inicialização:
+- _pnpm i @nestjs/config_
 
 ```
 📦Project-Folder
@@ -144,9 +145,19 @@ docker logs container_name
     pnpm i prisma -D
     pnpm i @prisma/client
     pnpm prisma init 
-###### Commands
-    pnpm prisma migrate dev
 
+###### Commum Commands
+    pnpm prisma migrate dev
+    pnpm prisma studio
+
+## BCripytJS
+
+###### Commum Commands
+    pnpm i bcryptjs
+    pnpm i @types/bcryptjs -D 
+    hash(stringToHash, numberOfInteractions)
+
+  
 - [ ] 
 - [ ] 
 - [ ] 
