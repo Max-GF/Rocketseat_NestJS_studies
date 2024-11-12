@@ -133,3 +133,6 @@ dist
 data/pg/
 data/postgres/
 docker-compose.yml
+
+# keys
+*.pem
