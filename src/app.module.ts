@@ -4,6 +4,9 @@ import { PrismaService } from './prisma/prisma.service';
 import { CreateAccountController } from './controllers/create-account.controller';
 import { envSchema } from './env';
 import { AuthModule } from './auth/auth.module';
+import { AuthentificateController } from './controllers/authentificate.controller';
+import { JwtService } from '@nestjs/jwt';
+import { CreateQuestionController } from './controllers/create-question.controller';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -12,7 +15,9 @@ import { AuthModule } from './auth/auth.module';
   }),
     AuthModule
   ],
-  controllers: [CreateAccountController],
+  controllers: [CreateAccountController,
+    AuthentificateController,
+    CreateQuestionController],
   providers: [PrismaService],
 })
 export class AppModule { }

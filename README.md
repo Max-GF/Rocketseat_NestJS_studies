@@ -48,8 +48,6 @@ Repository with notes from Rocketseat classes regarding NestJS
     await app.listen(port);
   ```
 
-
-
 - Modelo base, recomendado, para o [package.json](package.json)
 
   ```json
@@ -198,6 +196,12 @@ docker logs container_name
 - Bibliotecas necessárias:
   ```ps1
   pnpm i @nestjs/passport @nestjs/jwt
+  ```
+  ```ps1
+  pnpm i passport-jwt
+  ```
+  ```ps1
+  pnpm i @types/passport-jwt
   ```
 - JWT -> JSON Web Token
 

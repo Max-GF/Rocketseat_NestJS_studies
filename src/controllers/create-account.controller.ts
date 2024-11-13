@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, HttpCode, Post, UsePipes } from "@nestjs/common";
+import { Body, ConflictException, Controller, Get, HttpCode, Post, UsePipes } from "@nestjs/common";
 import { hash } from "bcryptjs";
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
 import { PrismaService } from "src/prisma/prisma.service";
@@ -12,7 +12,7 @@ const createAccountBodySchema = z.object({
 
 type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
 
-@Controller('/accounts')
+@Controller('/create_accounts')
 export class CreateAccountController {
     constructor(private prisma: PrismaService) { }
 
@@ -29,14 +29,19 @@ export class CreateAccountController {
         if (userWithSameEmail) {
             throw new ConflictException("E-mail already been used")
         }
-        const haskedPassword = await hash(password, 8)
+        const hashedPassword = await hash(password, 8)
         await this.prisma.user.create({
             data: {
                 name,
                 email,
-                password: haskedPassword,
+                password: hashedPassword,
             }
         })
     }
 
+    @Get()
+    @HttpCode(200)
+    async testConection(){
+        return "Hello!"
+    }
 }
