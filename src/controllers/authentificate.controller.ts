@@ -6,7 +6,6 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod"
 
 const authentificateBodySchema = z.object({
-    // name: z.string(),
     email: z.string().email(),
     password: z.string(),
 })

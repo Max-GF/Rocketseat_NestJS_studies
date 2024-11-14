@@ -11,7 +11,7 @@ Content-Type: application/json
  
 {
     "name": "Fulaninha",
-    "email": "fulaninha2@gmail.com",
+    "email": "fulaninha0@gmail.com",
     "password": "654243"
 }
 
@@ -27,7 +27,18 @@ Content-Type: application/json
 
 ###
 # @name create_question
-GET  {{baseURL}}/questions
+POST {{baseURL}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title" : "New Question 4",
+    "content" : "New Question Content"
+}
+
+###
+# @name fetch_questions
+GET  {{baseURL}}/questions?page=3
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 

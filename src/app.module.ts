@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthentificateController } from './controllers/authentificate.controller';
 import { JwtService } from '@nestjs/jwt';
 import { CreateQuestionController } from './controllers/create-question.controller';
+import { FetchQuestionsController } from './controllers/fetch-questions.controller';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -17,7 +18,8 @@ import { CreateQuestionController } from './controllers/create-question.controll
   ],
   controllers: [CreateAccountController,
     AuthentificateController,
-    CreateQuestionController],
+    CreateQuestionController,
+    FetchQuestionsController],
   providers: [PrismaService],
 })
 export class AppModule { }

@@ -209,3 +209,41 @@ docker logs container_name
   - O _secret_ será composto por duas chaves, uma pública e uma privada;
   - A chave privada é utilizada para criação e validação de tokens e fica armazenada **apenas** no serviço que cria novas autentificações;
   - A chave pública pode está em todos so serviços que precisam validar os tokens, porém não serve para criar novas autentificações;
+  - Para gerar as chaves existem diversos métodos, porém o mais rápido provavelmente é entrar num site e gerar;
+  - As chaves geradas estarão em formato de string, e muito provavelmente terá quebra de linhas, então tem que mudar para base64 para colocar no arquivo .env
+
+- Os arquivos da pasta [auth](./src/auth/)
+  - Eles são fixos, digo no sentido de que provavelmente não terão mudanças, são linhas de códigos feita por meio da documentação do NestJS, então creio que se por lá não alterar, muito provavelmente esse código também não será alterado;
+
+## Configurando o Vitest
+
+- Comandos iniciais:
+
+```ps1
+pnpm i vitest unplugin-swc @swc/core @vitest/coverage-v8 -D
+```
+```ps1
+pnpm i vite-tsconfig-paths -D
+```
+
+- Arquivo [vitest.config.ts](./vitest.config.ts) (padrão do NestJS)
+
+- Ajustando os scripts de teste no package.json:
+
+
+```json
+{
+  "type": "module",
+
+}
+// ...
+{
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:cov": "vitest run --coverage",
+    "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
+    "test:e2e": "vitest run --config ./vitest.config.e2e.ts"
+  }
+}
+```
