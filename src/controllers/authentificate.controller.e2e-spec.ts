@@ -21,13 +21,13 @@ describe('Authenticate (E2E)', async () => {
 
         await prisma.user.create({
             data: {
-                name: 'User for test 3',
-                email: 'userfortest3@example.com',
+                name: 'User for authetificate test',
+                email: 'userforauthtest@example.com',
                 password: await hash('123456',8),
         }
         })
         const response = await request(app.getHttpServer()).post('/authenticate').send({
-            email: 'userfortest3@example.com',
+            email: 'userforauthtest@example.com',
             password: '123456',
         })
         expect(response.statusCode).toBe(200)

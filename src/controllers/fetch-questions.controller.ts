@@ -25,7 +25,7 @@ export class FetchQuestionsController {
     async handle(
         @Query('page', queryValidationPipe) page: PageQueryParamsSchema,
         @CurrentUser() user: TokenPayloadSchema) {
-        const perPage = 1
+        const perPage = 20
         const questions = await this.prisma.question.findMany({
             orderBy: {
                 createdAt: 'desc'

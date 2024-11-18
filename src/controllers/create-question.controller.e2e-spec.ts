@@ -22,8 +22,8 @@ describe('Create question (E2E)', async () => {
     test('[POST] /questions', async () => {
         const userTest = await prisma.user.create({
             data: {
-                name: 'User for test 1',
-                email: 'userfortest1@example.com',
+                name: 'User for create question test',
+                email: 'userforcreatequestiontest@example.com',
                 password: '123456',
             }
         })

@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { execSync } from 'node:child_process'
 import 'dotenv/config'
 
-const prisma = new PrismaClient()
+let prisma: PrismaClient
 const schemaId = randomUUID()
 
 function generateUniqueDataBaseURL(schemaId: string): string {
@@ -18,8 +18,11 @@ beforeAll(async () => {
     const databaseURL = generateUniqueDataBaseURL(schemaId)
     process.env.DATABASE_URL = databaseURL
     execSync('pnpm prisma migrate deploy') // ele só roda as migrations no banco, já o dev ele gera novas se tiver mudanças 
+    prisma = new PrismaClient()
 })
 afterAll(async () => {
+    const currentSchema = await prisma.$queryRawUnsafe('SELECT current_schema()')
+    console.log('Current schema:', currentSchema)
     await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`)
     await prisma.$disconnect()
 })
