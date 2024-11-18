@@ -225,6 +225,12 @@ pnpm i vitest unplugin-swc @swc/core @vitest/coverage-v8 -D
 ```ps1
 pnpm i vite-tsconfig-paths -D
 ```
+```ps1
+pnpm i supertest -D
+```
+```ps1
+pnpm i @types/supertest -D
+```
 
 - Arquivo [vitest.config.ts](./vitest.config.ts) (padrão do NestJS)
 
@@ -247,3 +253,6 @@ pnpm i vite-tsconfig-paths -D
   }
 }
 ```
+
+- [setup-e2e.ts](./test/setup-e2e.ts)
+  - Basicamente é um arquivo que garante que o banco de dados seja um ambiente isolado para os testes;

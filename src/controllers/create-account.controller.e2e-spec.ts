@@ -7,7 +7,7 @@ import request from 'supertest'
 
 describe('Create account (E2E)', async () => {
     let app: INestApplication
-    let prisma : PrismaService
+    let prisma: PrismaService
     const moduleRef = await Test.createTestingModule({
         imports: [AppModule],
     }).compile()
@@ -17,15 +17,16 @@ describe('Create account (E2E)', async () => {
     await app.init()
 
     test('[POST] /create_accounts', async () => {
-        const response = await request(app.getHttpServer()).post('/create_accounts').send({
-            name: 'Jhon Doeee',
-            email: 'johndoeee@example.com',
+        const response = await request(app.getHttpServer()).post('/create_accounts')
+        .send({
+            name: 'User for test 2',
+            email: 'userfortest2@example.com',
             password: '123456',
         })
         expect(response.statusCode).toBe(201)
         const userOnDataBase = await prisma.user.findUnique({
             where: {
-                email : 'johndoe@example.com'
+                email: 'userfortest1@example.com'
             }
         })
         expect(userOnDataBase).toBeTruthy()
