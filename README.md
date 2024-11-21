@@ -256,3 +256,16 @@ pnpm i @types/supertest -D
 
 - [setup-e2e.ts](./test/setup-e2e.ts)
   - Basicamente é um arquivo que garante que o banco de dados seja um ambiente isolado para os testes;
+
+## Copiando os arquivos de um Dominínio
+
+- Baixar as dependências da camada de domínio;
+  - Dica, usando o código abaixo é possível fazer uma "verificação" geral de forma rápida:
+  ```ps1
+  pnpm tsc --noEmit
+  ```
+- Caso surja um erro com o _SpyInstance_, que é utilizado pelo Diego, ocorre que nas novas verções do Vitest, o _SpyInstance_ foi substituido por _MockInstance_, os demais problemas de TypeScript foram resolvidos jogando no GPT;
+
+## Mappers:
+
+- Os mappers são responsáveis por converter uma entidade de um formato para outro, permitindo que diferentes camadas da aplicação trabalhem com representações diferentes da mesma entidade
