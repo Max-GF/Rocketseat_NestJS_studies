@@ -5,6 +5,7 @@ import { TokenPayloadSchema } from "@/infra/auth/jwt.strategy";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { z } from "zod"
+import { CreateQuestionUseCase } from "@/domain/forum/application/use-cases/create-question";
 
 const createQuestionBodySchema = z.object({
     title: z.string(),
@@ -17,7 +18,8 @@ const createQuestionsBodyValidationPipe = new ZodValidationPipe(createQuestionBo
 @Controller('/questions')
 @UseGuards(AuthGuard('jwt'))
 export class CreateQuestionController {
-    constructor(private prisma: PrismaService) { }
+    constructor(private createQuestion : CreateQuestionUseCase) { }
+    // constructor(private prisma: PrismaService) { }
 
     @Post()
     @HttpCode(201)
@@ -25,13 +27,11 @@ export class CreateQuestionController {
         @CurrentUser() user: TokenPayloadSchema) {
         const { title, content } = body
         const userId = user.sub
-        await this.prisma.question.create({
-            data : {
-                title,
-                content,
-                slug : title.toLowerCase(),
-                authorId : userId,
-            },
+        await this.createQuestion.execute({
+            title,
+            content,
+            authorId: userId,
+            attachmentsIds: [],
         })
         return "ok"
     }

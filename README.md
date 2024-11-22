@@ -214,7 +214,7 @@ docker logs container_name
 
 - Os arquivos da pasta [auth](./src/auth/)
   - Eles são fixos, digo no sentido de que provavelmente não terão mudanças, são linhas de códigos feita por meio da documentação do NestJS, então creio que se por lá não alterar, muito provavelmente esse código também não será alterado;
-
+---
 ## Configurando o Vitest
 
 - Comandos iniciais:
@@ -256,7 +256,7 @@ pnpm i @types/supertest -D
 
 - [setup-e2e.ts](./test/setup-e2e.ts)
   - Basicamente é um arquivo que garante que o banco de dados seja um ambiente isolado para os testes;
-
+---
 ## Copiando os arquivos de um Dominínio
 
 - Baixar as dependências da camada de domínio;
@@ -269,3 +269,93 @@ pnpm i @types/supertest -D
 ## Mappers:
 
 - Os mappers são responsáveis por converter uma entidade de um formato para outro, permitindo que diferentes camadas da aplicação trabalhem com representações diferentes da mesma entidade
+
+### Ideia geral da nova organização de pastas:
+
+📦src
+ ┣ 📂core
+ ┃ ┣ 📂entities // Contratos base para as entidades
+ ┃ ┃ ┣ 📜aggregate-root.ts
+ ┃ ┃ ┣ 📜entity.ts
+ ┃ ┃ ┣ 📜unique-entity-id.ts
+ ┃ ┃ ┣ 📜watched-list.spec.ts
+ ┃ ┃ ┗ 📜watched-list.ts
+ ┃ ┣ 📂errors
+ ┃ ┃ ┣ 📂errors // Erros definidos para a aplicação
+ ┃ ┃ ┃ ┣ 📜not-allowed-error.ts
+ ┃ ┃ ┃ ┗ 📜resource-not-found-error.ts
+ ┃ ┃ ┗ 📜use-case-error.ts
+ ┃ ┣ 📂events // Eventos de domínio (Aula de notiicações)
+ ┃ ┃ ┣ 📜domain-event.ts
+ ┃ ┃ ┣ 📜domain-events.spec.ts
+ ┃ ┃ ┣ 📜domain-events.ts
+ ┃ ┃ ┗ 📜event-handler.ts
+ ┃ ┣ 📂repositories
+ ┃ ┃ ┗ 📜pagination-params.ts
+ ┃ ┣ 📂types // Só copia
+ ┃ ┃ ┗ 📜optional.ts
+ ┃ ┣ 📜either.spec.ts
+ ┃ ┗ 📜either.ts // Só copia
+ ┣ 📂domain // Pasta onde ficam os domínio
+ ┃ ┣ 📂Example-Domain
+ ┃ ┃ ┣ 📂application
+ ┃ ┃ ┃ ┣ 📂repositories
+ ┃ ┃ ┃ ┃ ┗ 📜example-repository.ts
+ ┃ ┃ ┃ ┗ 📂use-cases
+ ┃ ┃ ┃ ┃ ┗ 📜example-use-case.ts
+ ┃ ┃ ┗ 📂enterprise
+ ┃ ┃ ┃ ┣ 📂entities
+ ┃ ┃ ┃ ┃ ┣ 📂value-objects // Informações de uma entidade que são objetos e possuem algum tipo de validação ou operação
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜example-value-object.ts
+ ┃ ┃ ┃ ┃ ┗ 📜example-entity.ts
+ ┃ ┃ ┃ ┗ 📂events
+ ┃ ┃ ┃ ┃ ┗ 📜example-event-from-this-domain.ts
+ ┃ ┗ 📂notification // Vai ter em praticamente toda aplicação
+ ┃ ┃ ┣ 📂application
+ ┃ ┃ ┃ ┣ 📂repositories
+ ┃ ┃ ┃ ┃ ┗ 📜notifications-repository.ts
+ ┃ ┃ ┃ ┣ 📂subscribers // Basicamente são os acionadores de um determinado evento
+ ┃ ┃ ┃ ┃ ┗ 📜example-on-event-trigger.ts
+ ┃ ┃ ┃ ┗ 📂use-cases
+ ┃ ┃ ┃ ┃ ┣ 📜read-notification.spec.ts
+ ┃ ┃ ┃ ┃ ┣ 📜read-notification.ts
+ ┃ ┃ ┃ ┃ ┣ 📜send-notification.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜send-notification.ts
+ ┃ ┃ ┗ 📂enterprise
+ ┃ ┃ ┃ ┗ 📂entities
+ ┃ ┃ ┃ ┃ ┗ 📜notification.ts
+ ┗ 📂infra
+ ┃ ┣ 📂auth // Só copia, não tem muito o que entender aqui, é da documentação do NestJS
+ ┃ ┃ ┣ 📜auth.module.ts
+ ┃ ┃ ┣ 📜current-user-decorator.ts
+ ┃ ┃ ┗ 📜jwt.strategy.ts
+ ┃ ┣ 📂database // Coloca as paradas do banco de dados aqui
+ ┃ ┃ ┣ 📂banco-de-dados-escolhido
+ ┃ ┃ ┃ ┣ 📂mappers // Converte formato-entidade<=> formato-banco-de-dados
+ ┃ ┃ ┃ ┃ ┗ 📜example-mapper.ts
+ ┃ ┃ ┃ ┣ 📂repositories // repositórios do banco de dados
+ ┃ ┃ ┃ ┃ ┗ 📜example-repository.ts
+ ┃ ┃ ┃ ┗ 📜database.service.ts
+ ┃ ┃ ┗ 📜database.module.ts
+ ┃ ┣ 📂http
+ ┃ ┃ ┣ 📂controllers // Controllers do Nest
+ ┃ ┃ ┃ ┣ 📜authentificate.controller.e2e-spec.ts
+ ┃ ┃ ┃ ┣ 📜authentificate.controller.ts
+ ┃ ┃ ┃ ┣ 📜example.controller.e2e-spec.ts
+ ┃ ┃ ┃ ┗ 📜example.controller.ts
+ ┃ ┃ ┣ 📂pipes
+ ┃ ┃ ┃ ┗ 📜zod-validation-pipe.ts // Veja [create-question.controller.ts](./src/infra/http/controllers/create-question.controller.ts) para exemplo do uso dessa validação
+ ┃ ┃ ┗ 📜http.module.ts
+ ┃ ┣ 📜app.module.ts
+ ┃ ┣ 📜env.ts
+ ┃ ┗ 📜main.ts
+
+📦test
+ ┣ 📂factories
+ ┃ ┗ 📜factory-example.ts
+ ┣ 📂repositories
+ ┃ ┗ 📜example-test-repository.ts
+ ┣ 📂utils
+ ┃ ┗ 📜wait-for.ts // Só copia
+ ┗ 📜setup-e2e.ts
+ 

@@ -21,7 +21,7 @@ POST {{baseURL}}/authenticate
 Content-Type: application/json
  
 {
-    "email": "fulaninha2@gmail.com",
+    "email": "fulaninha0@gmail.com",
     "password": "654243"
 }
 
@@ -32,13 +32,13 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title" : "New Question 4",
+    "title" : "New Question 3",
     "content" : "New Question Content"
 }
 
 ###
 # @name fetch_questions
-GET  {{baseURL}}/questions?page=3
+GET  {{baseURL}}/questions?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
