@@ -38,10 +38,4 @@ export class CreateAccountController {
             }
         })
     }
-
-    @Get()
-    @HttpCode(200)
-    async testConection(){
-        return "ok"
-    }
 }

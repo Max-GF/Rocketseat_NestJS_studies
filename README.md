@@ -1,36 +1,32 @@
 # Rocketseat_NestJS_studies
-
 Repository with notes from Rocketseat classes regarding NestJS
 
 ## NestJS:
-
-  - Framework opnado, ou seja, existem muitos mais receitas para fazer as coisas;
-  - Semelhante ao Django no Python;
-  - Perde menos tempo pensando nas decisões técnicas
+  * Framework opnado, ou seja, existem muitos mais receitas para fazer as coisas;
+  * Semelhante ao Django no Python;
+  * Perde menos tempo pensando nas decisões técnicas;
 
 ## Instalando e iniciando um projeto NestJS
 
-- Execute no terminal **_npm i -g @nestjs/cli_** para baixar o NestJS (a parte do global é para facilitar o uso de comandos no terminal);
-- Execute no terminal _**nest new project-name**_ para criar um novo projeto NestJS;
-- Foi utilizado o **_pnpm_** pois ele lida melhor com a memória cache (Recomendação do Diego);
-- Lembrete, para utilizar o **_pnpm_** é necessário executar antes **_npm install -g pnpm_**;
-- Muitos arquivos gerados podem ser deletados, de maneira geral, a pasta pode ficar da seguinte maneira após ser executado o comando de inicialização:
-  ```
-  📦Project-Folder
-  ┣ 📦src
-  ┃  ┣ 📜app.controller.ts
-  ┃  ┣ 📜app.module.ts
-  ┃  ┣ 📜app.service.ts
-  ┃  ┗ 📜main.ts
-  ┣ 📦test
-  ┣ 📜next-cli.json
-  ┣ 📜package.json
-  ┣ 📜pnpm-lock.yaml
-  ┣ 📜tsconfig.build.sjon
-  ┗ 📜tsconfig.json
-  ```
-- _pnpm i @nestjs/config_, para realizar as configurações da variáveis de ambiente:
-- Arquivo [env.ts](./src/env.ts)
+1. Execute no terminal **_npm i -g @nestjs/cli_** para baixar o NestJS (a parte do global é para facilitar o uso de comandos no terminal)
+2. Execute no terminal _**nest new project-name**_ para criar um novo projeto NestJS;
+3. **Caso ainda não tenha sido feito**, para utilizar o **_pnpm_** é necessário executar antes **_npm install -g pnpm_**;
+4. Foi utilizado o **_pnpm_** pois ele lida melhor com a memória cache (Recomendação do Diego);
+5. Muitos arquivos gerados podem ser deletados, sendo assim, de maneira geral, a pasta pode ficar da seguinte forma após ser executado o comando de inicialização:
+<br>📦Project-Folder
+<br>┣ 📦src
+<br>┃  ┣ 📜app.controller.ts
+<br>┃  ┣ 📜app.module.ts
+<br>┃  ┣ 📜app.service.ts
+<br>┃  ┗ 📜main.ts
+<br>┣ 📦test
+<br>┣ 📜next-cli.json
+<br>┣ 📜package.json
+<br>┣ 📜pnpm-lock.yaml
+<br>┣ 📜tsconfig.build.sjon
+<br>┗ 📜tsconfig.json
+6. _pnpm i @nestjs/config_, para realizar as configurações da variáveis de ambiente:
+7. Arquivo [env.ts](./src/env.ts)
 
   ```JS
   // Aplicando configuração no arquivo .module
@@ -92,38 +88,40 @@ Repository with notes from Rocketseat classes regarding NestJS
 
 ## Estrutura básica do Nest
 
-- Possui uma forte opnião sobre os tipos de arquivos que vamos fazer na aplicação;
-  - Controller → Porta de entrada via http da aplicação; - No nest, os controllers são decorados com _@Controller()_; - No caso, cada método da classe que recebeu o decorador _@Controller()_ será uma rota;
-  - App.Module → "Raiz" do projeto;
+1. Possui uma forte opnião sobre os tipos de arquivos que vamos fazer na aplicação;
+  1.1 Controller → Porta de entrada via http da aplicação; - No nest, os controllers são decorados com _@Controller()_; - No caso, cada método da classe que recebeu o decorador _@Controller()_ será uma rota;
+  1.2 App.Module → "Raiz" do projeto;
     - Reune tudo num lugar só;
     - Geralmente é uma classe vazia com um decorador _@module()_;
+    - Controllers: Quais controllers existem dentro desse módulo (tudo que recebe requisição http);
     - As entradas do decorador são:
-      - Controllers: Quais controllers existem dentro desse módulo (tudo que recebe requisição http);
       - providers: Quais as dependências dos controllers (basicamente é tudo que não é controller);
     - Para que seja possível passar um _provider_, a classe que é passada precisa, obrigatoriamente, ter um decorador _@injectable()_;
 ---
 ## Docker
 
-- Download do [Docker-Desktop](https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module&_gl=1*qn6m94*_gcl_au*NzY5OTQxNTk1LjE3MzEwNzU1NTY.*_ga*MTY0Njg4OTY5MS4xNzI5NjE4NDMx*_ga_XJWPQMJYHQ*MTczMTA3NDIxMS4zLjEuMTczMTA3NTU1Ny41OS4wLjA.)
-- Download da imagem [Postgres]() para o docker
-- Docker não funcionou de primeira e tentei tudo isso aqui até resolver:
-  ```ps1
-  wsl --install
-  ```
-  ```ps1
-  wsl --list --online
-  ```
-  ```ps1
-  wsl --install -d Ubuntu-FOUNDED_VERSION
-  ```
-  ```ps1
-  bcedit /set hypervisorlaunchtype auto
-  ```
-  - Desmarcar a opção de WSL que está presente na hora de instalação do Docker Desktop
-  - BIOS -> Set "Enable" a opção de virtualização (depende do modelo da BIOS)
+1. Download do [Docker-Desktop](https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module&_gl=1*qn6m94*_gcl_au*NzY5OTQxNTk1LjE3MzEwNzU1NTY.*_ga*MTY0Njg4OTY5MS4xNzI5NjE4NDMx*_ga_XJWPQMJYHQ*MTczMTA3NDIxMS4zLjEuMTczMTA3NTU1Ny41OS4wLjA.)
+2. Download da imagem [Postgres]() para o docker
+3. Docker não funcionou de primeira, sendo assim eu tentei os seguintes comando e um deles ou o conjunto resolveu:
+      ```ps1
+      wsl --install
+      ```
+      ```ps1
+      wsl --list --online
+      ```
+      ```ps1
+      wsl --install -d Ubuntu-FOUNDED_VERSION
+      ```
+      ```ps1
+      bcedit /set hypervisorlaunchtype auto
+      ```
+    > Desmarcar a opção de WSL que está presente na hora de instalação do Docker Desktop;
+    
+    > Alterar a opção de "Virtualização" na BIOS da placa mãe;
 
 #### Exemplo do docker-compose.yml
 
+- Se der erro, deleta a parte do volume, tentei um monte de coisa que achei no git e com o GPT, mas sempre caia num erro de permissão da pasta, e como Diego falou que não é tão necessário assim para desenvolvimento, eu só deixei sem.
 ```yml
 version: "123.45"
 
@@ -140,8 +138,6 @@ services:
     volumes:
       - ./data/pg:/path/to/bd/folder
 ```
-
-  - Se der erro, deleta a parte do volume, tentei um monte de coisa que achei no git e com o GPT, mas sempre caia num erro de permissão da pasta, e como Diego falou que não é tão necessário assim para desenvolvimento, eu só deixei sem.
 
 ###### Docker comands
 
@@ -183,25 +179,28 @@ docker logs container_name
     pnpm prisma studio
 ---
 ## BCripytJS
+- É basicamente para utilizar os comandos _hash_ e _compare_
 
 ###### Commum Commands
-
-    pnpm i bcryptjs
-    pnpm i @types/bcryptjs -D
-    hash(stringToHash, numberOfInteractions)
+```ps1
+pnpm i bcryptjs
+```
+```ps1
+pnpm i @types/bcryptjs -D
+```
+```javascript
+hash(stringToHash, numberOfInteractions)
+```
+```javascript
+compare(password, user.password)
+```
 ---
 
 ## AuthModule
 
 - Bibliotecas necessárias:
   ```ps1
-  pnpm i @nestjs/passport @nestjs/jwt
-  ```
-  ```ps1
-  pnpm i passport-jwt
-  ```
-  ```ps1
-  pnpm i @types/passport-jwt
+  pnpm i @nestjs/passport @nestjs/jwt passport-jwt @types/passport-jwt
   ```
 - JWT -> JSON Web Token
 
@@ -232,130 +231,144 @@ pnpm i supertest -D
 pnpm i @types/supertest -D
 ```
 
-- Arquivo [vitest.config.ts](./vitest.config.ts) (padrão do NestJS)
+- Arquivo [vitest.config.ts](./vitest.config.ts) é padrão do NestJS
 
 - Ajustando os scripts de teste no package.json:
 
+  ```json
+  {
+    "type": "module",
 
-```json
-{
-  "type": "module",
-
-}
-// ...
-{
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:cov": "vitest run --coverage",
-    "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
-    "test:e2e": "vitest run --config ./vitest.config.e2e.ts"
   }
-}
-```
+  // ...
+  {
+    "scripts": {
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:cov": "vitest run --coverage",
+      "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
+      "test:e2e": "vitest run --config ./vitest.config.e2e.ts"
+    }
+  }
+  ```
 
-- [setup-e2e.ts](./test/setup-e2e.ts)
-  - Basicamente é um arquivo que garante que o banco de dados seja um ambiente isolado para os testes;
+- [setup-e2e.ts](./test/setup-e2e.ts) é basicamente um arquivo que garante que o banco de dados seja um ambiente isolado para os testes;
 ---
 ## Copiando os arquivos de um Dominínio
 
-- Baixar as dependências da camada de domínio;
-  - Dica, usando o código abaixo é possível fazer uma "verificação" geral de forma rápida:
-  ```ps1
-  pnpm tsc --noEmit
-  ```
-- Caso surja um erro com o _SpyInstance_, que é utilizado pelo Diego, ocorre que nas novas verções do Vitest, o _SpyInstance_ foi substituido por _MockInstance_, os demais problemas de TypeScript foram resolvidos jogando no GPT;
-
+1. Baixar as dependências da camada de domínio;
+2. Insira a pasta completa do domínio na pasta [domain](./src/domain/); 
+3. Faça uma verificação do TypeScript para garantir que todas as bibliotecas necessárias para a execução do domínio tenham sido baixadas.
+   - Código capaz de fazer uma "verificação" rápida do TypeScript:
+    ```ps1
+    pnpm tsc --noEmit
+    ```
+4. Execute os testes unitários da camada de domínio, e em seguida resolva, caso ocorra, os problemas encontrados antes de dar continuidade;
+    - Caso surja um erro com o _SpyInstance_, que é utilizado pelo Diego, ocorre que nas novas verções do Vitest, o _SpyInstance_ foi substituido por _MockInstance_, os demais problemas de TypeScript foram resolvidos jogando no GPT;
+---
 ## Mappers:
 
-- Os mappers são responsáveis por converter uma entidade de um formato para outro, permitindo que diferentes camadas da aplicação trabalhem com representações diferentes da mesma entidade
+Os mappers são responsáveis por converter uma entidade de um formato para outro, permitindo que diferentes camadas da aplicação trabalhem com representações diferentes da mesma entidade
 
-### Ideia geral da nova organização de pastas:
+---
+## Presenter:
 
-📦src
- ┣ 📂core
- ┃ ┣ 📂entities // Contratos base para as entidades
- ┃ ┃ ┣ 📜aggregate-root.ts
- ┃ ┃ ┣ 📜entity.ts
- ┃ ┃ ┣ 📜unique-entity-id.ts
- ┃ ┃ ┣ 📜watched-list.spec.ts
- ┃ ┃ ┗ 📜watched-list.ts
- ┃ ┣ 📂errors
- ┃ ┃ ┣ 📂errors // Erros definidos para a aplicação
- ┃ ┃ ┃ ┣ 📜not-allowed-error.ts
- ┃ ┃ ┃ ┗ 📜resource-not-found-error.ts
- ┃ ┃ ┗ 📜use-case-error.ts
- ┃ ┣ 📂events // Eventos de domínio (Aula de notiicações)
- ┃ ┃ ┣ 📜domain-event.ts
- ┃ ┃ ┣ 📜domain-events.spec.ts
- ┃ ┃ ┣ 📜domain-events.ts
- ┃ ┃ ┗ 📜event-handler.ts
- ┃ ┣ 📂repositories
- ┃ ┃ ┗ 📜pagination-params.ts
- ┃ ┣ 📂types // Só copia
- ┃ ┃ ┗ 📜optional.ts
- ┃ ┣ 📜either.spec.ts
- ┃ ┗ 📜either.ts // Só copia
- ┣ 📂domain // Pasta onde ficam os domínio
- ┃ ┣ 📂Example-Domain
- ┃ ┃ ┣ 📂application
- ┃ ┃ ┃ ┣ 📂repositories
- ┃ ┃ ┃ ┃ ┗ 📜example-repository.ts
- ┃ ┃ ┃ ┗ 📂use-cases
- ┃ ┃ ┃ ┃ ┗ 📜example-use-case.ts
- ┃ ┃ ┗ 📂enterprise
- ┃ ┃ ┃ ┣ 📂entities
- ┃ ┃ ┃ ┃ ┣ 📂value-objects // Informações de uma entidade que são objetos e possuem algum tipo de validação ou operação
- ┃ ┃ ┃ ┃ ┃ ┗ 📜example-value-object.ts
- ┃ ┃ ┃ ┃ ┗ 📜example-entity.ts
- ┃ ┃ ┃ ┗ 📂events
- ┃ ┃ ┃ ┃ ┗ 📜example-event-from-this-domain.ts
- ┃ ┗ 📂notification // Vai ter em praticamente toda aplicação
- ┃ ┃ ┣ 📂application
- ┃ ┃ ┃ ┣ 📂repositories
- ┃ ┃ ┃ ┃ ┗ 📜notifications-repository.ts
- ┃ ┃ ┃ ┣ 📂subscribers // Basicamente são os acionadores de um determinado evento
- ┃ ┃ ┃ ┃ ┗ 📜example-on-event-trigger.ts
- ┃ ┃ ┃ ┗ 📂use-cases
- ┃ ┃ ┃ ┃ ┣ 📜read-notification.spec.ts
- ┃ ┃ ┃ ┃ ┣ 📜read-notification.ts
- ┃ ┃ ┃ ┃ ┣ 📜send-notification.spec.ts
- ┃ ┃ ┃ ┃ ┗ 📜send-notification.ts
- ┃ ┃ ┗ 📂enterprise
- ┃ ┃ ┃ ┗ 📂entities
- ┃ ┃ ┃ ┃ ┗ 📜notification.ts
- ┗ 📂infra
- ┃ ┣ 📂auth // Só copia, não tem muito o que entender aqui, é da documentação do NestJS
- ┃ ┃ ┣ 📜auth.module.ts
- ┃ ┃ ┣ 📜current-user-decorator.ts
- ┃ ┃ ┗ 📜jwt.strategy.ts
- ┃ ┣ 📂database // Coloca as paradas do banco de dados aqui
- ┃ ┃ ┣ 📂banco-de-dados-escolhido
- ┃ ┃ ┃ ┣ 📂mappers // Converte formato-entidade<=> formato-banco-de-dados
- ┃ ┃ ┃ ┃ ┗ 📜example-mapper.ts
- ┃ ┃ ┃ ┣ 📂repositories // repositórios do banco de dados
- ┃ ┃ ┃ ┃ ┗ 📜example-repository.ts
- ┃ ┃ ┃ ┗ 📜database.service.ts
- ┃ ┃ ┗ 📜database.module.ts
- ┃ ┣ 📂http
- ┃ ┃ ┣ 📂controllers // Controllers do Nest
- ┃ ┃ ┃ ┣ 📜authentificate.controller.e2e-spec.ts
- ┃ ┃ ┃ ┣ 📜authentificate.controller.ts
- ┃ ┃ ┃ ┣ 📜example.controller.e2e-spec.ts
- ┃ ┃ ┃ ┗ 📜example.controller.ts
- ┃ ┃ ┣ 📂pipes
- ┃ ┃ ┃ ┗ 📜zod-validation-pipe.ts // Veja [create-question.controller.ts](./src/infra/http/controllers/create-question.controller.ts) para exemplo do uso dessa validação
- ┃ ┃ ┗ 📜http.module.ts
- ┃ ┣ 📜app.module.ts
- ┃ ┣ 📜env.ts
- ┃ ┗ 📜main.ts
+Os presenters são responsáveis por converter informações de modo que elas sejam melhores lidas pelo front end, ou até mesmo filtrar informações da saída dos controllers;
 
-📦test
- ┣ 📂factories
- ┃ ┗ 📜factory-example.ts
- ┣ 📂repositories
- ┃ ┗ 📜example-test-repository.ts
- ┣ 📂utils
- ┃ ┗ 📜wait-for.ts // Só copia
- ┗ 📜setup-e2e.ts
- 
+---
+
+### Ideia geral para organizão de pasta após a cópia do domínio:
+
+<br>📦src
+<br> ┣ 📂core
+<br> ┃ ┣ 📂entities // Contratos base para as entidades
+<br> ┃ ┃ ┣ 📜aggregate-root.ts
+<br> ┃ ┃ ┣ 📜entity.ts
+<br> ┃ ┃ ┣ 📜unique-entity-id.ts
+<br> ┃ ┃ ┣ 📜watched-list.spec.ts
+<br> ┃ ┃ ┗ 📜watched-list.ts
+<br> ┃ ┣ 📂errors
+<br> ┃ ┃ ┣ 📂errors // Erros definidos para a aplicação
+<br> ┃ ┃ ┃ ┣ 📜not-allowed-error.ts
+<br> ┃ ┃ ┃ ┗ 📜resource-not-found-error.ts
+<br> ┃ ┃ ┗ 📜use-case-error.ts
+<br> ┃ ┣ 📂events // Eventos de domínio (Aula de notificações)
+<br> ┃ ┃ ┣ 📜domain-event.ts
+<br> ┃ ┃ ┣ 📜domain-events.spec.ts
+<br> ┃ ┃ ┣ 📜domain-events.ts
+<br> ┃ ┃ ┗ 📜event-handler.ts
+<br> ┃ ┣ 📂repositories
+<br> ┃ ┃ ┗ 📜pagination-params.ts
+<br> ┃ ┣ 📂types // Só copia
+<br> ┃ ┃ ┗ 📜optional.ts
+<br> ┃ ┣ 📜either.spec.ts
+<br> ┃ ┗ 📜either.ts // Só copia
+<br> ┣ 📂domain // Pasta onde ficam os domínio
+<br> ┃ ┣ 📂Example-Domain
+<br> ┃ ┃ ┣ 📂application
+<br> ┃ ┃ ┃ ┣ 📂repositories
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-repository.ts
+<br> ┃ ┃ ┃ ┗ 📂use-cases
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-use-case.ts
+<br> ┃ ┃ ┗ 📂enterprise
+<br> ┃ ┃ ┃ ┣ 📂entities
+<br> ┃ ┃ ┃ ┃ ┣ 📂value-objects // Informações de uma entidade que são objetos e possuem algum tipo de validação ou operação
+<br> ┃ ┃ ┃ ┃ ┃ ┗ 📜example-value-object.ts
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-entity.ts
+<br> ┃ ┃ ┃ ┗ 📂events
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-event-from-this-domain.ts
+<br> ┃ ┗ 📂notification // Vai ter em praticamente toda aplicação
+<br> ┃ ┃ ┣ 📂application
+<br> ┃ ┃ ┃ ┣ 📂repositories
+<br> ┃ ┃ ┃ ┃ ┗ 📜notifications-repository.ts
+<br> ┃ ┃ ┃ ┣ 📂subscribers // Basicamente são os acionadores de um determinado evento
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-on-event-trigger.ts
+<br> ┃ ┃ ┃ ┗ 📂use-cases
+<br> ┃ ┃ ┃ ┃ ┣ 📜read-notification.spec.ts
+<br> ┃ ┃ ┃ ┃ ┣ 📜read-notification.ts
+<br> ┃ ┃ ┃ ┃ ┣ 📜send-notification.spec.ts
+<br> ┃ ┃ ┃ ┃ ┗ 📜send-notification.ts
+<br> ┃ ┃ ┗ 📂enterprise
+<br> ┃ ┃ ┃ ┗ 📂entities
+<br> ┃ ┃ ┃ ┃ ┗ 📜notification.ts
+<br> ┗ 📂infra
+<br> ┃ ┣ 📂auth // Só copia, não tem muito o que entender aqui, é da documentação do NestJS
+<br> ┃ ┃ ┣ 📜auth.module.ts
+<br> ┃ ┃ ┣ 📜current-user-decorator.ts
+<br> ┃ ┃ ┗ 📜jwt.strategy.ts
+<br> ┃ ┣ 📂database // Coloca as paradas do banco de dados aqui
+<br> ┃ ┃ ┣ 📂banco-de-dados-escolhido
+<br> ┃ ┃ ┃ ┣ 📂mappers // Converte formato-entidade<=> formato-banco-de-dados
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-mapper.ts
+<br> ┃ ┃ ┃ ┣ 📂repositories // repositórios do banco de dados
+<br> ┃ ┃ ┃ ┃ ┗ 📜example-repository.ts
+<br> ┃ ┃ ┃ ┗ 📜database.service.ts
+<br> ┃ ┃ ┗ 📜database.module.ts
+<br> ┃ ┣ 📂http
+<br> ┃ ┃ ┣ 📂controllers // Controllers do Nest
+<br> ┃ ┃ ┃ ┣ 📜authentificate.controller.e2e-spec.ts
+<br> ┃ ┃ ┃ ┣ 📜authentificate.controller.ts
+<br> ┃ ┃ ┃ ┣ 📜example.controller.e2e-spec.ts
+<br> ┃ ┃ ┃ ┗ 📜example.controller.ts
+<br> ┃ ┃ ┣ 📂pipes
+<br> ┃ ┃ ┃ ┗ 📜zod-validation-pipe.ts // Veja [create-question.controller.ts](./src/infra/http/controllers/create-question.controller.ts) para exemplo do uso dessa validação
+<br> ┃ ┃ ┗ 📜http.module.ts
+<br> ┃ ┣ 📜app.module.ts
+<br> ┃ ┣ 📜env.ts
+<br> ┃ ┗ 📜main.ts
+
+<br>📦test
+<br> ┣ 📂factories
+<br> ┃ ┗ 📜factory-example.ts
+<br> ┣ 📂repositories
+<br> ┃ ┗ 📜example-test-repository.ts
+<br> ┣ 📂utils
+<br> ┃ ┗ 📜wait-for.ts // Só copia
+<br> ┗ 📜setup-e2e.ts
+
+---
+
+## Gateway de criptografia
+
+- 
+  

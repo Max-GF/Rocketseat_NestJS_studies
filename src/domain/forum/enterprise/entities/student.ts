@@ -8,17 +8,17 @@ interface StudentProps {
 }
 
 export class Student extends Entity<StudentProps> {
+  get name(): string {
+    return this.name
+  }
+  get email(): string {
+    return this.email
+  }
+  get password(): string {
+    return this.password
+  }
   static create(props: StudentProps, id?: UniqueEntityID) {
     const student = new Student(props, id)
     return student
-  }
-  get name() : string {
-    return this.name
-  }
-  get email() : string {
-    return this.email
-  }
-  get password() : string {
-    return this.password
   }
 }
