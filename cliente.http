@@ -10,8 +10,8 @@ POST {{baseURL}}/create_accounts
 Content-Type: application/json
  
 {
-    "name": "Fulaninha",
-    "email": "fulaninha0@gmail.com",
+    "name": "Fulaninho",
+    "email": "fulaninho123@gmail.com",
     "password": "654243"
 }
 

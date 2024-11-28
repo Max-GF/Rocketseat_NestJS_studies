@@ -379,4 +379,12 @@ Os presenters são responsáveis por converter informações de modo que elas se
 ## Stubs de Criptografia
 
 - Stub -> Uma classe que implementa um contrato, porém a implementação é fictícia, feita apenas para teste;
-- 
+
+
+
+
+Etapas:
+
+1° Criar as entidades necessárias;
+2° Criar os casos de uso;
+3° Criar os testes unitários para os casos de uso;

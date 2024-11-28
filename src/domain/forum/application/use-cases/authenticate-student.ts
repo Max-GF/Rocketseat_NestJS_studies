@@ -31,7 +31,6 @@ export class AuthenticateStudentUseCase {
         
         const studentToAuthenticate = await this.studentsRepository.findByEmail(email)
 
-
         if (!studentToAuthenticate){
             return left(new StudentWrongCredentialsError())
         }
