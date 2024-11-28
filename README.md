@@ -370,5 +370,13 @@ Os presenters são responsáveis por converter informações de modo que elas se
 
 ## Gateway de criptografia
 
+- Responsável por gerenciar a comunicação entre os casos de uso (domínio) e o códulo de criptografia (infra/http);
+- Ficará salvo dentro do domínio;
+- Receberá um _payload_, ou seja, o que deseja incluir dentro do token
+
+---
+
+## Stubs de Criptografia
+
+- Stub -> Uma classe que implementa um contrato, porém a implementação é fictícia, feita apenas para teste;
 - 
-  
