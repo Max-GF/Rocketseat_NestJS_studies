@@ -22,7 +22,6 @@ beforeAll(async () => {
 })
 afterAll(async () => {
     const currentSchema = await prisma.$queryRawUnsafe('SELECT current_schema()')
-    console.log('Current schema:', currentSchema)
     await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`)
     await prisma.$disconnect()
 })
