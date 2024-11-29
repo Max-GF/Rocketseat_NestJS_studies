@@ -22,8 +22,6 @@ describe('Register Student', () => {
             password: '123456'
         })
         const hashedPassword = await fakeHasher.hash('123456')
-        console.log(inMemoryStudentRepository.items[0])
-        console.log(hashedPassword)
         expect(inMemoryStudentRepository.items[0]).toEqual(
             expect.objectContaining({
                 name: 'Test Student',

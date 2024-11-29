@@ -380,11 +380,35 @@ Os presenters são responsáveis por converter informações de modo que elas se
 
 - Stub -> Uma classe que implementa um contrato, porém a implementação é fictícia, feita apenas para teste;
 
+## Criando camada de domínio:
 
+```mermaid
+flowchart TD
+    START((Início)) --> FOLDER[Criar pasta do Domínio]
+    FOLDER --> APPLICATION[application]
+    FOLDER --> ENTERPRISE[enterprise]
+    FOLDER --> ERRORS[errors]
 
+    APPLICATION --> REPOSITORIES[repositories]
+    APPLICATION --> USECASES[use-cases]
+    APPLICATION --> CRYPTOGRAPHY[cryptography]
 
-Etapas:
+    ENTERPRISE --> ENTITIES[entities]
+    ENTERPRISE --> EVENTS[events]
 
-1° Criar as entidades necessárias;
-2° Criar os casos de uso;
-3° Criar os testes unitários para os casos de uso;
+    REPOSITORIES --> REPOSITORIESTEXT[["Criar os contratos de repositório aqui, além disso, lembre-se de criar como classe abstrata, o _NESTJS_ não suporta _INTERFACE_."]]
+
+    USECASES --> USECASESTEXT[["Criar casos de uso, lembra de colocar o _@Injectable()_" e de adicionar o modelo _Either_ para as saídas]]
+
+    CRYPTOGRAPHY --> CRYPTOGRAPHYTEXT[["Criar os contratos de criptografia aqui, além disso, lembre-se de criar como classe abstrata, o _NESTJS_ não suporta _INTERFACE_."]]
+
+    ENTITIES --> ENTITIESTEXT[["Declare as entidades de modo que elas extendam a _Entity_ presente da _CORE_ da aplicação, além disso, lembre-se de adicionar a implementação de agragados, e que os _undefined_ devem, também, ser possivelmente _null_, isso evita uns erros com o _NESTJS_"]]
+
+    ENTITIES --> VALUEOBJECT[value-object]
+
+    VALUEOBJECT --> VALUEOBJECTTEXT[["São variáveis de uma entidade que possuem regras de negócio"]]
+
+    EVENTS --> EVENTSTEXT[["Os disparos dos events dos agregados devem estar presentes aqui, lembrando que todos eles devem implementar o _DomainEvent_ presente no _CORE_"]]
+
+    ERRORS --> ERRORSTEXT[["Categorizar os erros desse domínio, de modo que todos extendam a classe _UseCaseError_ presene no _Core_"]]
+```
