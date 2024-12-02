@@ -1,35 +1,37 @@
 import { AppModule } from '@/infra/app.module'
+import { DataBaseModule } from '@/infra/database/database.module'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
+import { StudentFactory } from 'test/factories/make-student'
 
 
 describe('Create question (E2E)', async () => {
     let app: INestApplication
     let prisma: PrismaService
     let jwt: JwtService
-    const moduleRef = await Test.createTestingModule({
-        imports: [AppModule],
-    }).compile()
+    let studentFactory: StudentFactory
+    beforeAll(async () => {
+        const moduleRef = await Test.createTestingModule({
+            imports: [AppModule, DataBaseModule],
+            providers: [StudentFactory]
+        }).compile()
 
-    app = moduleRef.createNestApplication()
-    prisma = moduleRef.get(PrismaService)
-    jwt = moduleRef.get(JwtService)
-    await app.init()
+        app = moduleRef.createNestApplication()
+        prisma = moduleRef.get(PrismaService)
+        jwt = moduleRef.get(JwtService)
+        studentFactory = moduleRef.get(StudentFactory)
+        await app.init()
+    })
 
     test('[POST] /questions', async () => {
-        const userTest = await prisma.user.create({
-            data: {
-                name: 'User for create question test',
-                email: 'userforcreatequestiontest@example.com',
-                password: '123456',
-            }
-        })
-        const accessToken = jwt.sign({ sub: userTest.id })
+        const userTest = await studentFactory.makePrismaStudent()
+        const accessToken = jwt.sign({ sub: userTest.id.toString() })
 
-        const response = await request(app.getHttpServer()).post('/questions')
+        const response = await request(app.getHttpServer())
+            .post('/questions')
             .set('Authorization', `Bearer ${accessToken}`)
             .send({
                 title: 'Question 123',
