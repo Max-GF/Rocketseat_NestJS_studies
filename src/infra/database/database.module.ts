@@ -9,13 +9,15 @@ import { PrismaQuestionCommentsRepository } from "./prisma/repositories/prisma-q
 import { QuestionsRepository } from "@/domain/forum/application/repositories/questions-repository";
 import { StudentsRepository } from "@/domain/forum/application/repositories/student-repository";
 import { PrismaStudentsRepository } from "./prisma/repositories/prisma-student-repository";
+import { AnswersRepository } from "@/domain/forum/application/repositories/answers-repository";
+import { AnswerAttachmentsRepository } from "@/domain/forum/application/repositories/answer-attachments-repository";
+import { AnswerCommentsRepository } from "@/domain/forum/application/repositories/answer-comments-repository";
+import { QuestionAttachmentsRepository } from "@/domain/forum/application/repositories/question-attachments-repository";
+import { QuestionCommentsRepository } from "@/domain/forum/application/repositories/question-comments-repository";
 
 @Module({
     providers: [
         PrismaService,
-        PrismaAnswersRepository,
-        PrismaAnswerCommentsRepository,
-        PrismaAnswerAttachmentsRepository,
         {
             provide: StudentsRepository, // Toda vez que um arquivo solicitar o QuestionsRepository (dependência)
             useClass: PrismaStudentsRepository, // O NestJS deve entender como sendo essa classe aqui
@@ -24,18 +26,36 @@ import { PrismaStudentsRepository } from "./prisma/repositories/prisma-student-r
             provide: QuestionsRepository, // Toda vez que um arquivo solicitar o QuestionsRepository (dependência)
             useClass: PrismaQuestionsRepository, // O NestJS deve entender como sendo essa classe aqui
         },
-        PrismaQuestionAttachmentsRepository,
-        PrismaQuestionCommentsRepository,
+        {
+            provide: AnswersRepository,
+            useClass: PrismaAnswersRepository,
+        },
+        {
+            provide: AnswerCommentsRepository,
+            useClass: PrismaAnswerCommentsRepository,
+        },
+        {
+            provide: AnswerAttachmentsRepository,
+            useClass: PrismaAnswerAttachmentsRepository,
+        },
+        {
+            provide: QuestionCommentsRepository,
+            useClass: PrismaQuestionCommentsRepository,
+        },
+        {
+            provide: QuestionAttachmentsRepository,
+            useClass: PrismaQuestionAttachmentsRepository,
+        },
     ],
     exports: [
-        StudentsRepository,
         PrismaService,
-        PrismaAnswersRepository,
-        PrismaAnswerCommentsRepository,
-        PrismaAnswerAttachmentsRepository,
+        StudentsRepository,
+        AnswersRepository,
+        AnswerCommentsRepository,
+        AnswerAttachmentsRepository,
         QuestionsRepository,
-        PrismaQuestionAttachmentsRepository,
-        PrismaQuestionCommentsRepository,
+        QuestionAttachmentsRepository,
+        QuestionCommentsRepository,
     ], // Esse "expors" é para quando eu for importar DataBaseModule ele carregar o Prisma junto
 })
 export class DataBaseModule {
