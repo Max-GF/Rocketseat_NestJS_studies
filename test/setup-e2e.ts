@@ -21,7 +21,6 @@ function generateUniqueDataBaseURL(schemaId: string): string {
 beforeAll(async () => {
     const databaseURL = generateUniqueDataBaseURL(schemaId)
     process.env.DATABASE_URL = databaseURL
-    console.log(process.env.DATABASE_URL)
     prisma = new PrismaClient()
     execSync('pnpm prisma migrate deploy') // ele só roda as migrations no banco, já o dev ele gera novas se tiver mudanças 
 })
