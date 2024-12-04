@@ -380,7 +380,20 @@ Os presenters são responsáveis por converter informações de modo que elas se
 
 - Stub -> Uma classe que implementa um contrato, porém a implementação é fictícia, feita apenas para teste;
 
-## Criando camada de domínio:
+---
+
+## Upload de arquivos
+
+- O NestJS, se utilizando o express que é o nativo, utiliza o multer para lidar com o download de arquivos;
+- Rapaz, pelo que entendi é um modelo definido do Nest, como ele é uma framework opnado, acho que não vai ser muito diferente disso por um tempo;
+- 
+```ps1
+pnpm i -D @types/multer
+```
+
+
+---
+## Estrutura da camada de domínio:
 
 ```mermaid
 flowchart TD
@@ -411,4 +424,19 @@ flowchart TD
     EVENTS --> EVENTSTEXT[["Os disparos dos events dos agregados devem estar presentes aqui, lembrando que todos eles devem implementar o _DomainEvent_ presente no _CORE_"]]
 
     ERRORS --> ERRORSTEXT[["Categorizar os erros desse domínio, de modo que todos extendam a classe _UseCaseError_ presene no _Core_"]]
+```
+## Criando controllers:
+
+```mermaid
+flowchart TD
+    START((Início)) --> UseCase["Adicionar _@Injectable()_ no caso de uso"]
+    UseCase --> Controller["Criar arquivo do controller"]
+    Controller --> Controller1["Criar os pipes de validação dos dados com o zod"]
+    Controller1 --> Controller2["Definir a rota e os parâmetros"]
+    Controller2 --> Controller3["Chamar o caso de uso e enviar os parâmetros"]
+    Controller3 --> Controller4["Coletar o retorno do caso de uso e utilizar o _presenter_ para ajustar os dados antes de enviar para o retorno da rota"]
+    Controller4 --> ControllerSpec["Criar o arquivo _e2e-spec_ do controller"]
+    ControllerSpec --> ControllerSpec1["Criar o _beforeAll_ de modo que o banco de dados seja resetado para cada teste e que ele não seja o mesmo da aplicação em produção"]
+    ControllerSpec1 --> ControllerSpec2["Criar a lógica para o teste da rota"]
+    ControllerSpec2 --> Fim
 ```

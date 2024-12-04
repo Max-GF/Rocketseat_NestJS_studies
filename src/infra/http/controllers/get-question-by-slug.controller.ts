@@ -1,9 +1,6 @@
-import { Controller, Get, HttpCode, Param, Query } from "@nestjs/common";
+import { Controller, Get, HttpCode, Param } from "@nestjs/common";
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import { TokenPayloadSchema } from "@/infra/auth/jwt.strategy";
-import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
-import { z } from "zod";
-import { FetchRecentQuestionsUseCase } from "@/domain/forum/application/use-cases/fetch-recent-questions";
 import { QuestionPresenter } from "../presenters/question-presenter";
 import { GetQuestionBySlugUseCase } from "@/domain/forum/application/use-cases/get-question-by-slug";
 
